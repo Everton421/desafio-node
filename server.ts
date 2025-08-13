@@ -2,6 +2,10 @@
 import crypto from 'node:crypto'
     
 import fastify from 'fastify'
+import { db } from './src/database/client.ts'
+import { courses } from './src/database/schema.ts'
+import { eq } from 'drizzle-orm'
+
 const   server = fastify({
     logger: {
          transport: {
@@ -14,22 +18,28 @@ const   server = fastify({
     }
 })
 const port = 3000 
+ 
+server.get('/courses', async  ( request, reply )=>{
+        const result = await db.select( { 
+            id: courses.id,
+            description: courses.description
+        }).from(courses)
+        return  reply.send({ courses:result }) 
+})
+ 
 
-const teste = [
-    {id:"1", description: 'SftE123'},
-    {id:"2", description: 'SftE124'}
+server.get('/courses/:id', async ( request, reply )=>{
+    type params = {
+        id:string
+    }
+    const params = request.params as params
 
-]
-
-server.get('/teste', () =>{
-    return teste
-})  
-
- server.post('/teste',( req, rep )=>{
-        let obj =  {id: crypto.randomUUID(), description:'teste1213'}  
-     teste.push(  obj )
-     return obj
- })
-
+    const courseId =  params.id 
+    const result = await db.select().from(courses).where(  eq(courses.id, courseId))
+         
+             if( result.length > 0  ){
+                  return   reply.send( { course: result[0]}) 
+             }
+})
+ 
 server.listen({ port:port, }).then(()=> console.log(`Servidor rodando porta : ${port}`))
-
