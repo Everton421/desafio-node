@@ -7,10 +7,11 @@ import { title } from 'process'
 import { ResponseSerializationError } from 'fastify-type-provider-zod'
 
 export const  getCouseByIdRoute :FastifyPluginAsyncZod = async (server ) => {
- server.get('/courses/:id',
+ server.get('/course/:id',
       {
       schema: { 
                 tags:['courses'] ,
+                summary:"Get course by id",
          params:  z.object({ 
                  id: z.uuid() 
          }),
