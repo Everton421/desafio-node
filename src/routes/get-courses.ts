@@ -2,7 +2,7 @@ import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { db } from '../database/client.ts'
 import { courses } from '../database/schema.ts'
 import z from 'zod'
-import { asc, ilike } from 'drizzle-orm'
+import { and, asc, ilike, SQL } from 'drizzle-orm'
 
 export const  getCousesRoute :FastifyPluginAsyncZod = async (server ) => {
     server.get('/courses', 
@@ -12,7 +12,8 @@ export const  getCousesRoute :FastifyPluginAsyncZod = async (server ) => {
                 summary:"Get all courses",
                 querystring: z.object({
                     search: z.string().optional(),
-                    orderBy: z.enum(['title','id']).optional().default('title')
+                    orderBy: z.enum(['title','id']).optional().default('title'),
+                    page: z.coerce.number().optional().default(1)
                 }),
                 response:{
                     200: z.object({
@@ -20,25 +21,40 @@ export const  getCousesRoute :FastifyPluginAsyncZod = async (server ) => {
                              z.object({
                                 id: z.uuid(),
                                 title: z.string()
-                            })
-                       )
+                            }),
+                       ),
+                            total: z.number()
                     })
                 }
             }
         }
         ,async  ( request, reply )=>{
             
-            const { search, orderBy } = request.query
+            const { search, orderBy, page } = request.query
+
+            const conditions:SQL[] = []
+            if( search ){
+                conditions.push( ilike(courses.title, `%${search}%` ) )
+            }
             
-            const result = await db.select( { 
-                id: courses.id,
-                title: courses.title
-            })
-            .from(courses)
-            .where( 
-                search ? ilike(courses.title, `%${search}%` ) : undefined
-            )
-            .orderBy(asc(courses[orderBy]))
-            return  reply.send({ courses:result  }) 
+               const [ result, total] = await Promise.all([
+                db.select( { 
+                    id: courses.id,
+                    title: courses.title
+                })
+                .from(courses)
+                .where( 
+                   and(...conditions)  
+                )
+                .limit(10)
+                .offset( ( page -1 ) * 2 )
+                .orderBy(asc(courses[orderBy])),
+
+                    db.$count(courses, and(...conditions) ) 
+                ])
+           
+       
+
+            return  reply.send({ courses:result, total:total  }) 
     })
 }
