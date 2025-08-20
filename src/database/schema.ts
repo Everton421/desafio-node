@@ -14,7 +14,8 @@ export const   courses = pgTable('courses',{
 })
 
 export const enrollments = pgTable('enrollments', { 
-     userId: uuid().notNull().references(()=> courses.id),
+    id: uuid().primaryKey().defaultRandom(),
+     userId: uuid().notNull().references(()=> users.id),
      courseId: uuid().notNull().references(()=> courses.id),
      createdAt: timestamp().notNull().defaultNow()
 })

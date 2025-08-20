@@ -1,8 +1,8 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { db } from '../database/client.ts'
-import { courses } from '../database/schema.ts'
+import { courses, enrollments } from '../database/schema.ts'
 import z from 'zod'
-import { and, asc, ilike, SQL } from 'drizzle-orm'
+import { and, asc, count, eq, ilike, SQL } from 'drizzle-orm'
 
 export const  getCousesRoute :FastifyPluginAsyncZod = async (server ) => {
     server.get('/courses', 
@@ -20,7 +20,9 @@ export const  getCousesRoute :FastifyPluginAsyncZod = async (server ) => {
                         courses: z.array( 
                              z.object({
                                 id: z.uuid(),
-                                title: z.string()
+                                title: z.string(),
+                                enrollments: z.number()  
+
                             }),
                        ),
                             total: z.number()
@@ -33,6 +35,7 @@ export const  getCousesRoute :FastifyPluginAsyncZod = async (server ) => {
             const { search, orderBy, page } = request.query
 
             const conditions:SQL[] = []
+
             if( search ){
                 conditions.push( ilike(courses.title, `%${search}%` ) )
             }
@@ -40,15 +43,17 @@ export const  getCousesRoute :FastifyPluginAsyncZod = async (server ) => {
                const [ result, total] = await Promise.all([
                 db.select( { 
                     id: courses.id,
-                    title: courses.title
+                    title: courses.title,
+                    enrollments: count( enrollments.id)
                 })
                 .from(courses)
-                .where( 
-                   and(...conditions)  
-                )
+                .innerJoin( enrollments, eq(enrollments.courseId , courses.id))
+                .where( and(...conditions) )
+                .groupBy(courses.id) 
                 .limit(10)
                 .offset( ( page -1 ) * 2 )
                 .orderBy(asc(courses[orderBy])),
+                 
 
                     db.$count(courses, and(...conditions) ) 
                 ])

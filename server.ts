@@ -8,6 +8,7 @@ import { getCousesRoute } from './src/routes/get-courses.ts'
 import { getCouseByIdRoute } from './src/routes/get-course-by-id.ts'
 import { createCousesRoute } from './src/routes/create-courses.ts'
 import scalarAPIReference  from '@scalar/fastify-api-reference'
+
 // configurações do fastify
 //  ⚠️ pino-pretty precisa ser instalado como uma dependência de desenvolvimento.
 // .withTypeProvider<ZodTypeProvider>() ** usado para habilitar a inferência de tipo estático de esquemas Zod,

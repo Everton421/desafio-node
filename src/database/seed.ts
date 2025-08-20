@@ -1,5 +1,5 @@
-import { db } from "./client";
-import { courses, enrollments, users } from "./schema";
+import { db } from "./client.ts";
+import { courses, enrollments, users } from "./schema.ts";
 import { fakerPT_BR as faker } from '@faker-js/faker'
 
 async function seed(){
@@ -24,9 +24,11 @@ async function seed(){
         [
            { courseId: coursesInsert[0].id, userId: usersInsert[0].id },
            { courseId: coursesInsert[0].id, userId: usersInsert[1].id }, 
-           { courseId: coursesInsert[0].id, userId: usersInsert[2].id } 
+           { courseId: coursesInsert[1].id, userId: usersInsert[2].id } 
         ]
     ).returning()
 }
 
 seed()
+ 
+ 
