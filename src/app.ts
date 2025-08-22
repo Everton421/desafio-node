@@ -4,9 +4,9 @@ import fastify from 'fastify'
 import { fastifySwagger } from '@fastify/swagger'
 
 import { validatorCompiler, serializerCompiler, type ZodTypeProvider, jsonSchemaTransform } from 'fastify-type-provider-zod'
-import { getCousesRoute } from './src/routes/get-courses.ts'
-import { getCouseByIdRoute } from './src/routes/get-course-by-id.ts'
-import { createCousesRoute } from './src/routes/create-courses.ts'
+import { getCousesRoute } from './routes/get-courses.ts'
+import { getCouseByIdRoute } from './routes/get-course-by-id.ts'
+import { createCousesRoute } from './routes/create-courses.ts'
 import scalarAPIReference  from '@scalar/fastify-api-reference'
 
 // configurações do fastify
@@ -51,7 +51,4 @@ server.register( getCousesRoute)
 server.register( getCouseByIdRoute)
 server.register( createCousesRoute)
 
-
-const port = 3000 
- 
-server.listen({ port:port, }).then(()=> console.log(`Servidor rodando porta : ${port}`))
+export { server }

@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "node --env-file .env --watch --experimental-strip-types server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --env-file .env --watch --experimental-strip-types src/server.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
-    "db:seed": "node --env-file .env src/database/seed.ts"
+    "db:seed": "node --env-file .env src/database/seed.ts",
+    "pretest": "dotenv -e .env.test drizzle-kit migrate",
+    "test": "dotenv -e .env.test vitest run" 
   },
   "keywords": [],
   "author": "",
@@ -29,7 +30,11 @@
   "devDependencies": {
     "@faker-js/faker": "^9.9.0",
     "@types/node": "^24.2.1",
+    "@types/supertest": "^6.0.3",
+    "dotenv-cli": "^10.0.0",
     "drizzle-kit": "^0.31.4",
-    "typescript": "^5.9.2"
+    "supertest": "^7.1.4",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
   }
 }
