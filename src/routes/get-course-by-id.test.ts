@@ -9,8 +9,6 @@ test(' Get course by id', async ()=> {
 
     const course  = await makeCourse()
 
-        
-
         const  response = await request(server.server)
         .get(`/courses/${course.id}`)
 
@@ -23,4 +21,17 @@ test(' Get course by id', async ()=> {
                  description:  null 
              }
          })
+})
+
+test('return 404 for nono existing courses ', async ()=> {
+
+    await server.ready() 
+
+
+        const  response = await request(server.server)
+        .get(`/courses/e35096a3-5414-4055-9706-d49f147047d5`)
+
+
+         expect( response.status).toEqual(404)
+       
 })

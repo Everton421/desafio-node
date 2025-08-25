@@ -50,6 +50,20 @@
       "when": 1755818024548,
       "tag": "0006_remarkable_zodiak",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1756136788011,
+      "tag": "0007_easy_runaways",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1756136834665,
+      "tag": "0008_burly_ultimates",
+      "breakpoints": true
     }
   ]
 }
