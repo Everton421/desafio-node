@@ -17,11 +17,11 @@ export const  createCousesRoute :FastifyPluginAsyncZod = async (server ) => {
                         }
                 }
     },
-    async  ( request, reply ) =>{
+    async  ( request, reply ) =>{ 
             const body = request.body   
             const courseTitle = body.title
                     const result = await db.insert(courses).values({ title: courseTitle}).returning()    
-                        return reply.status(201).send({ courseID: result[0].id})
+                        return reply.status(201).send({ courseID: result[0].id}) 
     
     })
 }

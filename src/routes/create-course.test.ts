@@ -14,7 +14,6 @@ import { faker } from '@faker-js/faker'
     .set( 'Conten-type', 'aplication/json')
     .send( { title:  faker.lorem.words(4) })
  
-    console.log(response.body)
 
         expect( response.status).toEqual(201)
          expect(response.body).toEqual({

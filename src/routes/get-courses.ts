@@ -47,7 +47,7 @@ export const  getCousesRoute :FastifyPluginAsyncZod = async (server ) => {
                     enrollments: count( enrollments.id)
                 })
                 .from(courses)
-                .innerJoin( enrollments, eq(enrollments.courseId , courses.id))
+                .leftJoin( enrollments, eq(enrollments.courseId , courses.id))
                 .where( and(...conditions) )
                 .groupBy(courses.id) 
                 .limit(10)
