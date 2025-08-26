@@ -23,7 +23,7 @@ test(' Get course by id', async ()=> {
          })
 })
 
-test('return 404 for nono existing courses ', async ()=> {
+test('return 404 for non existing courses ', async ()=> {
 
     await server.ready() 
 
