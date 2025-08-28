@@ -8,6 +8,7 @@ import { getCousesRoute } from './routes/get-courses.ts'
 import { getCouseByIdRoute } from './routes/get-course-by-id.ts'
 import { createCousesRoute } from './routes/create-courses.ts'
 import scalarAPIReference  from '@scalar/fastify-api-reference'
+import { loginRoute } from './routes/login.ts'
 
 // configurações do fastify
 //  ⚠️ pino-pretty precisa ser instalado como uma dependência de desenvolvimento.
@@ -50,5 +51,6 @@ server.setValidatorCompiler( validatorCompiler )
 server.register( getCousesRoute)
 server.register( getCouseByIdRoute)
 server.register( createCousesRoute)
+server.register(loginRoute)
 
 export { server }

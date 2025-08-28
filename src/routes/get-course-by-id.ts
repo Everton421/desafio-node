@@ -3,8 +3,6 @@ import { db } from '../database/client.ts'
 import { courses } from '../database/schema.ts'
 import z, { string } from 'zod'
 import { eq } from 'drizzle-orm'
-import { title } from 'process'
-import { ResponseSerializationError } from 'fastify-type-provider-zod'
 
 export const  getCouseByIdRoute :FastifyPluginAsyncZod = async (server ) => {
  server.get('/courses/:id',

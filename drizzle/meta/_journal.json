@@ -5,64 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1755114902600,
-      "tag": "0000_redundant_phalanx",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1755116408496,
-      "tag": "0001_outstanding_sharon_carter",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1755616011685,
-      "tag": "0002_milky_malcolm_colcord",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1755616325342,
-      "tag": "0003_petite_dexter_bennett",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1755652783154,
-      "tag": "0004_lowly_slyde",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1755655941182,
-      "tag": "0005_lying_meggan",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1755818024548,
-      "tag": "0006_remarkable_zodiak",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "7",
-      "when": 1756136788011,
-      "tag": "0007_easy_runaways",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "7",
-      "when": 1756136834665,
-      "tag": "0008_burly_ultimates",
+      "when": 1756322321698,
+      "tag": "0000_sticky_shooting_star",
       "breakpoints": true
     }
   ]

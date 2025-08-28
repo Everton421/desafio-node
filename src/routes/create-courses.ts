@@ -10,6 +10,7 @@ export const  createCousesRoute :FastifyPluginAsyncZod = async (server ) => {
                     body: z.object(
                             { title: z.string() }
                         ),
+                        tags:['courses'] ,
                         summary:'Create a course',
                         description:'Registra um curso ',
                         response:{

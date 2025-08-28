@@ -30,5 +30,5 @@ export const enrollments = pgTable('enrollments', {
 }, 
  table => [ 
    uniqueIndex().on( table.userId, table.courseId)
-  ]
+  ] 
 )

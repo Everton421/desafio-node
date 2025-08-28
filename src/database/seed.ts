@@ -1,19 +1,49 @@
-import {  hash } from "argon2";
+  import {  hash } from "argon2";
+  import { fakerPT_BR as faker } from '@faker-js/faker'
 import { db } from "./client.ts";
 import { courses, enrollments, users } from "./schema.ts";
-import { fakerPT_BR as faker } from '@faker-js/faker'
+
 
 async function seed(){
-
-    const passwordHash = await hash("123")
+    const passwordHash = await hash("123456")
     const usersInsert = await db.insert(users).values(
         [
-            { name:faker.person.fullName(), email: faker.internet.email() , password: passwordHash },
-            { name:faker.person.fullName(), email: faker.internet.email(),  password: passwordHash  },
-            { name:faker.person.fullName(), email: faker.internet.email() , password: passwordHash },
-            { name:faker.person.fullName(), email: faker.internet.email() , password: passwordHash },
-            { name:faker.person.fullName(), email: faker.internet.email() , password: passwordHash },
-            { name:faker.person.fullName(), email: faker.internet.email() , password: passwordHash },
+            { 
+                name:faker.person.fullName(),
+                email: faker.internet.email() ,
+                 password: passwordHash,
+                role: 'student',
+                },
+            { 
+                name:faker.person.fullName(),
+                email: faker.internet.email(),  
+                password: passwordHash,
+            role: 'student',
+            },
+            { 
+                name:faker.person.fullName(),
+                email: faker.internet.email() ,
+                 password: passwordHash,
+                role: 'student'
+                },
+            { 
+                name:faker.person.fullName(),
+                email: faker.internet.email() ,
+                 password: passwordHash,
+                role: 'student' 
+                },
+            { 
+                name:faker.person.fullName(),
+                email: faker.internet.email() ,
+                 password: passwordHash,
+                role: 'student',
+                },
+            { 
+                name:faker.person.fullName(),
+                email: faker.internet.email() ,
+                 password: passwordHash,
+                role: 'student' 
+                },
         ]
     ).returning()
 
@@ -29,9 +59,8 @@ async function seed(){
            { courseId: coursesInsert[0].id, userId: usersInsert[1].id }, 
            { courseId: coursesInsert[1].id, userId: usersInsert[2].id } 
         ]
-    ).returning()
+    ) 
 }
 
 seed()
- 
  
