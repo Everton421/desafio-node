@@ -34,9 +34,7 @@ export const  loginRoute :FastifyPluginAsyncZod = async (server ) => {
             if( result.length === 0 ){
                 return reply.status(400).send({ message: 'Credenciais invalidas.'})
             }
-
             const user = result[0]
-
             const doesPasswordsMatch = await verify( user.password, password)
 
                 if( !doesPasswordsMatch ){
@@ -54,10 +52,8 @@ export const  loginRoute :FastifyPluginAsyncZod = async (server ) => {
                     process.env.JWT_SECRET
                 )
 
-
                 //return reply.status(201).send({ courseId: result[0].id})
                 return reply.status(200).send({ token  })
-
 
     })
 }

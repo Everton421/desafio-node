@@ -5,6 +5,7 @@ import { courses, enrollments, users } from "./schema.ts";
 
 
 async function seed(){
+     
     const passwordHash = await hash("123456")
     const usersInsert = await db.insert(users).values(
         [
@@ -13,36 +14,6 @@ async function seed(){
                 email: faker.internet.email() ,
                  password: passwordHash,
                 role: 'student',
-                },
-            { 
-                name:faker.person.fullName(),
-                email: faker.internet.email(),  
-                password: passwordHash,
-            role: 'student',
-            },
-            { 
-                name:faker.person.fullName(),
-                email: faker.internet.email() ,
-                 password: passwordHash,
-                role: 'student'
-                },
-            { 
-                name:faker.person.fullName(),
-                email: faker.internet.email() ,
-                 password: passwordHash,
-                role: 'student' 
-                },
-            { 
-                name:faker.person.fullName(),
-                email: faker.internet.email() ,
-                 password: passwordHash,
-                role: 'student',
-                },
-            { 
-                name:faker.person.fullName(),
-                email: faker.internet.email() ,
-                 password: passwordHash,
-                role: 'student' 
                 },
         ]
     ).returning()
@@ -60,6 +31,7 @@ async function seed(){
            { courseId: coursesInsert[1].id, userId: usersInsert[2].id } 
         ]
     ) 
+      
 }
 
 seed()
